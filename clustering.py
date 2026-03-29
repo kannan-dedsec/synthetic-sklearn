@@ -11,16 +11,16 @@ from sklearn.datasets import make_blobs
 
 
 def kmeans_cluster(data: np.ndarray, n_clusters: int, random_state: int = 42) -> Tuple[np.ndarray, KMeans]:
-    """Perform K-Means clustering on the given data.
+  """Perform K-Means clustering on the given data.
 
-    Args:
-        data (np.ndarray): The input data for clustering.
-        n_clusters (int): The number of clusters to form.
-        random_state (int, optional): Seed for random number generator. Default is 42.
+  Args:
+    data (np.ndarray): The input data for clustering.
+    n_clusters (int): The number of clusters to form.
+    random_state (int, optional): Seed for random number generator. Default is 42.
 
-    Returns:
-        Tuple[np.ndarray, KMeans]: The cluster labels and the KMeans model.
-    """
+  Returns:
+    Tuple[np.ndarray, KMeans]: The cluster labels and the KMeans model.
+  """
     kmeans = KMeans(n_clusters=n_clusters, random_state=random_state)
     labels = kmeans.fit_predict(data)
     return labels, kmeans
@@ -39,8 +39,8 @@ def dbscan_cluster(data: np.ndarray, eps: float, min_samples: int) -> Tuple[np.n
     Returns:
         Tuple[np.ndarray, DBSCAN]: The cluster labels and the DBSCAN model.
     """
-    dbscan = DBSCAN(eps=eps, min_samples=min_samples)
-    labels = dbscan.fit_predict(data)
+      dbscan = DBSCAN(eps=eps, min_samples=min_samples)
+      labels = dbscan.fit_predict(data)
     return labels, dbscan
 
 
