@@ -21,7 +21,7 @@ def grid_search_tuning(
     scoring: Optional[str] = None,
     n_jobs: int = -1
 ) -> GridSearchCV:
-    """Performs hyperparameter tuning using Grid Search.
+  """Performs hyperparameter tuning using Grid Search.
 
     Args:
         model (BaseEstimator): The model to be tuned.
@@ -51,25 +51,25 @@ def random_search_tuning(
     scoring: Optional[str] = None,
     n_jobs: int = -1
 ) -> RandomizedSearchCV:
-    """Performs hyperparameter tuning using Randomized Search.
+      """Performs hyperparameter tuning using Randomized Search.
 
-    Args:
-        model (BaseEstimator): The model to be tuned.
-        param_distributions (Dict[str, List[Any]]): The parameter distributions to sample.
-        X (Any): Feature data.
-        y (Any): Target data.
-        n_iter (int, optional): Number of iterations. Defaults to 100.
-        cv (int, optional): Number of cross-validation folds. Defaults to 5.
-        scoring (Optional[str], optional): Scoring metric. Defaults to None.
-        n_jobs (int, optional): Number of jobs to run in parallel. Defaults to -1.
+      Args:
+          model (BaseEstimator): The model to be tuned.
+          param_distributions (Dict[str, List[Any]]): The parameter distributions to sample.
+          X (Any): Feature data.
+          y (Any): Target data.
+          n_iter (int, optional): Number of iterations. Defaults to 100.
+          cv (int, optional): Number of cross-validation folds. Defaults to 5.
+          scoring (Optional[str], optional): Scoring metric. Defaults to None.
+          n_jobs (int, optional): Number of jobs to run in parallel. Defaults to -1.
 
-    Returns:
-        RandomizedSearchCV: The fitted RandomizedSearchCV object.
-    """
-    random_search = RandomizedSearchCV(estimator=model, param_distributions=param_distributions,
+      Returns:
+          RandomizedSearchCV: The fitted RandomizedSearchCV object.
+      """
+      random_search = RandomizedSearchCV(estimator=model, param_distributions=param_distributions,
                                        n_iter=n_iter, cv=cv, scoring=scoring, n_jobs=n_jobs)
-    random_search.fit(X, y)
-    return random_search
+      random_search.fit(X, y)
+      return random_search
 
 
 def bayesian_optimization_tuning(
@@ -82,25 +82,25 @@ def bayesian_optimization_tuning(
     scoring: Optional[str] = None,
     n_jobs: int = -1
 ) -> BayesSearchCV:
-    """Performs hyperparameter tuning using Bayesian Optimization.
+	"""Performs hyperparameter tuning using Bayesian Optimization.
 
-    Args:
-        model (BaseEstimator): The model to be tuned.
-        search_spaces (Dict[str, Tuple[Any, Any]]): The search spaces for the parameters.
-        X (Any): Feature data.
-        y (Any): Target data.
-        n_iter (int, optional): Number of iterations. Defaults to 50.
-        cv (int, optional): Number of cross-validation folds. Defaults to 5.
-        scoring (Optional[str], optional): Scoring metric. Defaults to None.
-        n_jobs (int, optional): Number of jobs to run in parallel. Defaults to -1.
+	Args:
+	    model (BaseEstimator): The model to be tuned.
+	    search_spaces (Dict[str, Tuple[Any, Any]]): The search spaces for the parameters.
+	    X (Any): Feature data.
+	    y (Any): Target data.
+	    n_iter (int, optional): Number of iterations. Defaults to 50.
+	    cv (int, optional): Number of cross-validation folds. Defaults to 5.
+	    scoring (Optional[str], optional): Scoring metric. Defaults to None.
+	    n_jobs (int, optional): Number of jobs to run in parallel. Defaults to -1.
 
-    Returns:
-        BayesSearchCV: The fitted BayesSearchCV object.
-    """
-    bayes_search = BayesSearchCV(estimator=model, search_spaces=search_spaces,
+	Returns:
+	    BayesSearchCV: The fitted BayesSearchCV object.
+	"""
+	bayes_search = BayesSearchCV(estimator=model, search_spaces=search_spaces,
                                   n_iter=n_iter, cv=cv, scoring=scoring, n_jobs=n_jobs)
-    bayes_search.fit(X, y)
-    return bayes_search
+	bayes_search.fit(X, y)
+	return bayes_search
 
 
 def get_default_param_grids() -> Dict[str, Dict[str, List[Any]]]:
