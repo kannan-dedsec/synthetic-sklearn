@@ -13,7 +13,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
 
 
-def train_linear(X: np.ndarray, y: np.ndarray) -> LinearRegression:
+def trainLinear(X: np.ndarray, y: np.ndarray) -> LinearRegression:
     """Train a linear regression model.
 
     Args:
@@ -44,7 +44,7 @@ def train_ridge(X: np.ndarray, y: np.ndarray, alpha: float) -> Ridge:
     return model
 
 
-def train_lasso(X: np.ndarray, y: np.ndarray, alpha: float) -> Lasso:
+def trainLasso(X: np.ndarray, y: np.ndarray, alpha: float) -> Lasso:
     """Train a lasso regression model.
 
     Args:
@@ -77,7 +77,7 @@ def train_elastic_net(X: np.ndarray, y: np.ndarray, alpha: float, l1_ratio: floa
     return model
 
 
-def evaluate_model(model, X: np.ndarray, y: np.ndarray) -> Tuple[float, float]:
+def evaluateModel(model, X: np.ndarray, y: np.ndarray) -> Tuple[float, float]:
     """Evaluate a regression model using Mean Squared Error.
 
     Args:
