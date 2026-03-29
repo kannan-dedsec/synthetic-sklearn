@@ -14,16 +14,12 @@ from typing import Dict, Any, Tuple
 
 
 def classification_report_dict(y_true: np.ndarray, y_pred: np.ndarray) -> Dict[str, Any]:
-    """
-    Generate a classification report as a dictionary.
-
+    """Generate a classification report as a dictionary.
     Parameters:
     y_true (np.ndarray): True labels.
     y_pred (np.ndarray): Predicted labels.
-
     Returns:
-    Dict[str, Any]: Classification report as a dictionary.
-    """
+    Dict[str, Any]: Classification report as a dictionary."""
     report = classification_report(y_true, y_pred, output_dict=True)
     return report
 
@@ -32,7 +28,6 @@ def plot_confusion_matrix(y_true: np.ndarray, y_pred: np.ndarray,
                           labels: list = None, title: str = 'Confusion Matrix') -> None:
     """
     Plot the confusion matrix using seaborn heatmap.
-
     Parameters:
     y_true (np.ndarray): True labels.
     y_pred (np.ndarray): Predicted labels.
@@ -51,14 +46,7 @@ def plot_confusion_matrix(y_true: np.ndarray, y_pred: np.ndarray,
 
 def plot_roc_curve(y_true: np.ndarray, y_scores: np.ndarray, 
                    title: str = 'Receiver Operating Characteristic') -> None:
-    """
-    Plot the Receiver Operating Characteristic (ROC) curve.
-
-    Parameters:
-    y_true (np.ndarray): True binary labels.
-    y_scores (np.ndarray): Target scores, probability estimates of the positive class.
-    title (str, optional): Title of the plot. Defaults to 'Receiver Operating Characteristic'.
-    """
+    # Removed docstring entirely
     fpr, tpr, _ = roc_curve(y_true, y_scores)
     roc_auc = auc(fpr, tpr)
 
