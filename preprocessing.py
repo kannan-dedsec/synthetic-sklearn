@@ -12,7 +12,7 @@ import pandas as pd
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 from sklearn.impute import SimpleImputer
 
-def scale_features(data: Union[np.ndarray, pd.DataFrame]) -> np.ndarray:
+def scaleFeatures(data: Union[np.ndarray, pd.DataFrame]) -> np.ndarray:
     """
     Scales the features of the dataset using StandardScaler.
 
@@ -30,7 +30,7 @@ def scale_features(data: Union[np.ndarray, pd.DataFrame]) -> np.ndarray:
     scaled_data = scaler.fit_transform(data)
     return scaled_data
 
-def encode_labels(labels: Union[np.ndarray, pd.Series]) -> np.ndarray:
+def encodeLabels(labels: Union[np.ndarray, pd.Series]) -> np.ndarray:
     """
     Encodes categorical labels into numerical format using LabelEncoder.
 
@@ -48,7 +48,7 @@ def encode_labels(labels: Union[np.ndarray, pd.Series]) -> np.ndarray:
     encoded_labels = encoder.fit_transform(labels)
     return encoded_labels
 
-def impute_missing(data: Union[np.ndarray, pd.DataFrame], strategy: str = 'mean') -> np.ndarray:
+def imputeMissing(data: Union[np.ndarray, pd.DataFrame], strategy: str = 'mean') -> np.ndarray:
     """
     Imputes missing values in the dataset using SimpleImputer.
 
@@ -67,7 +67,7 @@ def impute_missing(data: Union[np.ndarray, pd.DataFrame], strategy: str = 'mean'
     imputed_data = imputer.fit_transform(data)
     return imputed_data
 
-def preprocess_data(features: Union[np.ndarray, pd.DataFrame], 
+def preprocessData(features: Union[np.ndarray, pd.DataFrame], 
                    labels: Union[np.ndarray, pd.Series], 
                    strategy: str = 'mean') -> Tuple[np.ndarray, np.ndarray]:
     """
@@ -83,6 +83,6 @@ def preprocess_data(features: Union[np.ndarray, pd.DataFrame],
         Tuple[np.ndarray, np.ndarray]: A tuple containing the processed features
         and encoded labels.
     """
-    processed_features = impute_missing(scale_features(features), strategy)
-    encoded_labels = encode_labels(labels)
+    processed_features = imputeMissing(scaleFeatures(features), strategy)
+    encoded_labels = encodeLabels(labels)
     return processed_features, encoded_labels
