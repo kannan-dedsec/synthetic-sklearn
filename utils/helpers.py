@@ -17,7 +17,6 @@ from typing import Callable, Any, Dict, Optional
 
 def set_seed(seed: int) -> None:
     """Set the random seed for reproducibility.
-
     Args:
         seed (int): The seed value to set for random number generators.
     """
@@ -32,7 +31,6 @@ def log_experiment(
     log_file: Optional[str] = None
 ) -> None:
     """Log experiment details to a file or the console.
-
     Args:
         experiment_name (str): The name of the experiment.
         parameters (Dict[str, Any]): The parameters used in the experiment.
@@ -55,14 +53,6 @@ def log_experiment(
 
 
 def format_results(results: Dict[str, Any]) -> str:
-    """Format the results for display.
-
-    Args:
-        results (Dict[str, Any]): The results to format.
-
-    Returns:
-        str: A formatted string representation of the results.
-    """
     formatted_results = "\n".join(
         f"{key}: {value}" for key, value in results.items()
     )
@@ -71,10 +61,8 @@ def format_results(results: Dict[str, Any]) -> str:
 
 def timer_decorator(func: Callable) -> Callable:
     """Decorator to time the execution of a function.
-
     Args:
         func (Callable): The function to decorate.
-
     Returns:
         Callable: The wrapped function with timing functionality.
     """
