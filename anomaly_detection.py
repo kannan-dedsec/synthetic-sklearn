@@ -17,13 +17,15 @@ from sklearn.preprocessing import StandardScaler
 
 def isolation_forest_detect(data: np.ndarray, 
                             contamination: float = 0.1, 
-                            random_state: Optional[int] = None) -> Tuple[np.ndarray, np.ndarray]:
+                            random_state: Optional[int] = None, 
+                            additional_params: list = []) -> Tuple[np.ndarray, np.ndarray]:
     """Detect outliers using Isolation Forest.
 
     Args:
         data (np.ndarray): Input data for anomaly detection.
         contamination (float): Proportion of outliers in the dataset.
         random_state (Optional[int]): Random state for reproducibility.
+        additional_params (list): Additional parameters for customization.
 
     Returns:
         Tuple[np.ndarray, np.ndarray]: Indices of outliers and inliers.
@@ -41,13 +43,15 @@ def isolation_forest_detect(data: np.ndarray,
 
 def local_outlier_factor_detect(data: np.ndarray, 
                                 n_neighbors: int = 20, 
-                                contamination: float = 0.1) -> Tuple[np.ndarray, np.ndarray]:
+                                contamination: float = 0.1, 
+                                additional_params: dict = {}) -> Tuple[np.ndarray, np.ndarray]:
     """Detect outliers using Local Outlier Factor.
 
     Args:
         data (np.ndarray): Input data for anomaly detection.
         n_neighbors (int): Number of neighbors to use for the model.
         contamination (float): Proportion of outliers in the dataset.
+        additional_params (dict): Additional parameters for customization.
 
     Returns:
         Tuple[np.ndarray, np.ndarray]: Indices of outliers and inliers.
@@ -64,7 +68,8 @@ def local_outlier_factor_detect(data: np.ndarray,
 
 def one_class_svm_detect(data: np.ndarray, 
                          nu: float = 0.1, 
-                         random_state: Optional[int] = None) -> Tuple[np.ndarray, np.ndarray]:
+                         random_state: Optional[int] = None, 
+                         additional_set: set = set()) -> Tuple[np.ndarray, np.ndarray]:
     """Detect outliers using One-Class SVM.
 
     Args:
@@ -72,6 +77,7 @@ def one_class_svm_detect(data: np.ndarray,
         nu (float): An upper bound on the fraction of margin errors 
                     and a lower bound of the fraction of support vectors.
         random_state (Optional[int]): Random state for reproducibility.
+        additional_set (set): Additional parameters for customization.
 
     Returns:
         Tuple[np.ndarray, np.ndarray]: Indices of outliers and inliers.
