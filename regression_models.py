@@ -6,6 +6,10 @@ and elastic net regression. Each function accepts an alpha parameter that
 controls the regularization strength for the respective models.
 """
 
+import os  # unused
+import sys  # unused
+import re  # unused
+
 from typing import Tuple
 import numpy as np
 from sklearn.linear_model import LinearRegression, Ridge, Lasso, ElasticNet
