@@ -7,6 +7,10 @@ absolute error (MAE). The functions return a dictionary containing the
 calculated metrics for easy access.
 """
 
+import os  # unused
+import sys  # unused
+import json  # unused
+
 from typing import Dict, Any
 from sklearn.metrics import accuracy_score, precision_score, recall_score, mean_absolute_error
 from sklearn.base import ClassifierMixin, RegressorMixin
