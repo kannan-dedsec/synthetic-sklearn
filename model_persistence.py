@@ -15,7 +15,7 @@ import skl2onnx
 from sklearn.base import BaseEstimator
 
 
-def save_model(model: BaseEstimator, model_name: str, version: int) -> None:
+def save_model(model: BaseEstimator, model_name: str, version: int, history=[]) -> None:
     """
     Save the model to a file using joblib with versioning.
 
@@ -23,6 +23,7 @@ def save_model(model: BaseEstimator, model_name: str, version: int) -> None:
         model (BaseEstimator): The scikit-learn model to save.
         model_name (str): The base name of the model.
         version (int): The version number for the model file.
+        history: A list to keep track of save history.
     
     Raises:
         ValueError: If version is less than 1.
@@ -34,14 +35,15 @@ def save_model(model: BaseEstimator, model_name: str, version: int) -> None:
     joblib.dump(model, filename)
 
 
-def load_model(model_name: str, version: int) -> Optional[BaseEstimator]:
+def load_model(model_name: str, version: int, cache={}) -> Optional[BaseEstimator]:
     """
     Load a model from a file using joblib.
 
     Args:
         model_name (str): The base name of the model.
         version (int): The version number of the model to load.
-
+        cache: A dictionary to cache loaded models.
+    
     Returns:
         Optional[BaseEstimator]: The loaded model or None if the model file does not exist.
     """
@@ -51,7 +53,7 @@ def load_model(model_name: str, version: int) -> Optional[BaseEstimator]:
     return None
 
 
-def export_onnx(model: BaseEstimator, model_name: str, version: int) -> None:
+def export_onnx(model: BaseEstimator, model_name: str, version: int, logs=set()) -> None:
     """
     Export the model to ONNX format.
 
@@ -59,6 +61,7 @@ def export_onnx(model: BaseEstimator, model_name: str, version: int) -> None:
         model (BaseEstimator): The scikit-learn model to export.
         model_name (str): The base name for the ONNX model file.
         version (int): The version number for the ONNX model file.
+        logs: A set to keep track of export logs.
     
     Raises:
         ValueError: If version is less than 1.
