@@ -13,7 +13,7 @@ from sklearn.manifold import TSNE
 import umap
 
 
-def apply_pca(data: pd.DataFrame, n_components: int) -> Tuple[np.ndarray, float]:
+def applyPCA(data: pd.DataFrame, n_components: int) -> Tuple[np.ndarray, float]:
     """Apply PCA to reduce dimensionality of the data.
 
     Args:
@@ -30,7 +30,7 @@ def apply_pca(data: pd.DataFrame, n_components: int) -> Tuple[np.ndarray, float]
     return transformed_data, explained_variance
 
 
-def apply_tsne(data: pd.DataFrame, n_components: int = 2, perplexity: float = 30.0) -> np.ndarray:
+def applyTsne(data: pd.DataFrame, n_components: int = 2, perplexity: float = 30.0) -> np.ndarray:
     """Apply t-SNE to reduce dimensionality of the data.
 
     Args:
@@ -47,7 +47,7 @@ def apply_tsne(data: pd.DataFrame, n_components: int = 2, perplexity: float = 30
     return transformed_data
 
 
-def apply_umap(data: pd.DataFrame, n_components: int = 2) -> np.ndarray:
+def applyUmap(data: pd.DataFrame, n_components: int = 2) -> np.ndarray:
     """Apply UMAP to reduce dimensionality of the data.
 
     Args:
@@ -70,15 +70,15 @@ def main():
     # data = pd.read_csv('your_dataset.csv')
     
     # Applying PCA
-    # pca_result, pca_variance = apply_pca(data, n_components=2)
+    # pca_result, pca_variance = applyPCA(data, n_components=2)
     # print(f"PCA Result:\n{pca_result}\nExplained Variance: {pca_variance}")
 
     # Applying t-SNE
-    # tsne_result = apply_tsne(data)
+    # tsne_result = applyTsne(data)
     # print(f"t-SNE Result:\n{tsne_result}")
 
     # Applying UMAP
-    # umap_result = apply_umap(data)
+    # umap_result = applyUmap(data)
     # print(f"UMAP Result:\n{umap_result}")
 
 
