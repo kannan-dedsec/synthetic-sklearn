@@ -16,13 +16,13 @@ class OutlierRemover(BaseEstimator, TransformerMixin):
     """Transformer to remove outliers from a dataset based on IQR."""
 
     def __init__(self, threshold: float = 1.5):
-        """
-        Parameters:
-            threshold (float): The IQR multiplier to determine outliers.
-        """
-        self.threshold = threshold
-        self.lower_bound: Optional[np.ndarray] = None
-        self.upper_bound: Optional[np.ndarray] = None
+      """
+      Parameters:
+          threshold (float): The IQR multiplier to determine outliers.
+      """
+      self.threshold = threshold
+      self.lower_bound: Optional[np.ndarray] = None
+      self.upper_bound: Optional[np.ndarray] = None
 
     def fit(self, X: pd.DataFrame, y: Optional[np.ndarray] = None) -> "OutlierRemover":
         """Fit the transformer to the data by calculating the IQR.
@@ -35,7 +35,7 @@ class OutlierRemover(BaseEstimator, TransformerMixin):
             OutlierRemover: The fitted transformer.
         """
         q1 = X.quantile(0.25)
-        q3 = X.quantile(0.75)
+          q3 = X.quantile(0.75)
         iqr = q3 - q1
 
         self.lower_bound = q1 - self.threshold * iqr
@@ -60,14 +60,14 @@ class OutlierRemover(BaseEstimator, TransformerMixin):
 
         return filtered_data.reset_index(drop=True)
 
-    def fit_transform(self, X: pd.DataFrame, y: Optional[np.ndarray] = None) -> pd.DataFrame:
-        """Fit the transformer and then remove outliers.
+	def fit_transform(self, X: pd.DataFrame, y: Optional[np.ndarray] = None) -> pd.DataFrame:
+	    """Fit the transformer and then remove outliers.
 
-        Parameters:
-            X (pd.DataFrame): The input data.
-            y (Optional[np.ndarray]): Target values (ignored).
+	    Parameters:
+	        X (pd.DataFrame): The input data.
+	        y (Optional[np.ndarray]): Target values (ignored).
 
-        Returns:
-            pd.DataFrame: The data with outliers removed.
-        """
-        return self.fit(X, y).transform(X)
+	    Returns:
+	        pd.DataFrame: The data with outliers removed.
+	    """
+	    return self.fit(X, y).transform(X)
