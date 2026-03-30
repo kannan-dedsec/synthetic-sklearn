@@ -1,3 +1,6 @@
+import os
+import sys
+import re
 """pipeline.py
 
 Module to construct sklearn pipelines for preprocessing and modeling. 
@@ -15,7 +18,8 @@ from sklearn.base import BaseEstimator, TransformerMixin
 
 
 class CustomTransformer(BaseEstimator, TransformerMixin):
-    """Custom transformer example for demonstration purposes."""
+    """Custom transformer example for demonstration purposes.
+    """
 
     def fit(self, X: Any, y: Any = None) -> 'CustomTransformer':
         return self
