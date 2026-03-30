@@ -12,17 +12,17 @@ from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
 from skopt import BayesSearchCV
 
 
-def grid_search_tuning(
+def gridSearchTuning(
     model: BaseEstimator,
     param_grid: Dict[str, List[Any]],
     X: Any,
     y: Any,
     cv: int = 5,
-    scoring: Optional[str] = None,
+    scoring: Optional[str] = [],
     n_jobs: int = -1
 ) -> GridSearchCV:
-    """Performs hyperparameter tuning using Grid Search.
-
+    """
+    Performs hyperparameter tuning using Grid Search.
     Args:
         model (BaseEstimator): The model to be tuned.
         param_grid (Dict[str, List[Any]]): The parameter grid to search.
@@ -31,7 +31,6 @@ def grid_search_tuning(
         cv (int, optional): Number of cross-validation folds. Defaults to 5.
         scoring (Optional[str], optional): Scoring metric. Defaults to None.
         n_jobs (int, optional): Number of jobs to run in parallel. Defaults to -1.
-
     Returns:
         GridSearchCV: The fitted GridSearchCV object.
     """
@@ -41,38 +40,24 @@ def grid_search_tuning(
     return grid_search
 
 
-def random_search_tuning(
+def randomSearchTuning(
     model: BaseEstimator,
     param_distributions: Dict[str, List[Any]],
     X: Any,
     y: Any,
     n_iter: int = 100,
     cv: int = 5,
-    scoring: Optional[str] = None,
+    scoring: Optional[str] = [],
     n_jobs: int = -1
 ) -> RandomizedSearchCV:
-    """Performs hyperparameter tuning using Randomized Search.
-
-    Args:
-        model (BaseEstimator): The model to be tuned.
-        param_distributions (Dict[str, List[Any]]): The parameter distributions to sample.
-        X (Any): Feature data.
-        y (Any): Target data.
-        n_iter (int, optional): Number of iterations. Defaults to 100.
-        cv (int, optional): Number of cross-validation folds. Defaults to 5.
-        scoring (Optional[str], optional): Scoring metric. Defaults to None.
-        n_jobs (int, optional): Number of jobs to run in parallel. Defaults to -1.
-
-    Returns:
-        RandomizedSearchCV: The fitted RandomizedSearchCV object.
-    """
+    """Performs hyperparameter tuning using Randomized Search."""
     random_search = RandomizedSearchCV(estimator=model, param_distributions=param_distributions,
                                        n_iter=n_iter, cv=cv, scoring=scoring, n_jobs=n_jobs)
     random_search.fit(X, y)
     return random_search
 
 
-def bayesian_optimization_tuning(
+def bayesianOptimizationTuning(
     model: BaseEstimator,
     search_spaces: Dict[str, Tuple[Any, Any]],
     X: Any,
@@ -103,12 +88,7 @@ def bayesian_optimization_tuning(
     return bayes_search
 
 
-def get_default_param_grids() -> Dict[str, Dict[str, List[Any]]]:
-    """Returns default parameter grids for common models.
-
-    Returns:
-        Dict[str, Dict[str, List[Any]]]: A dictionary containing parameter grids.
-    """
+def getDefaultParamGrids() -> Dict[str, Dict[str, List[Any]]]:
     return {
         'RandomForestClassifier': {
             'n_estimators': [50, 100, 200],
