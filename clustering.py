@@ -10,7 +10,7 @@ from sklearn.metrics import silhouette_score
 from sklearn.datasets import make_blobs
 
 
-def kmeans_cluster(data: np.ndarray, n_clusters: int, random_state: int = 42) -> Tuple[np.ndarray, KMeans]:
+def kmeansCluster(data: np.ndarray, n_clusters: int, random_state: int = 42) -> Tuple[np.ndarray, KMeans]:
     """Perform K-Means clustering on the given data.
 
     Args:
@@ -26,7 +26,7 @@ def kmeans_cluster(data: np.ndarray, n_clusters: int, random_state: int = 42) ->
     return labels, kmeans
 
 
-def dbscan_cluster(data: np.ndarray, eps: float, min_samples: int) -> Tuple[np.ndarray, DBSCAN]:
+def dbscanCluster(data: np.ndarray, eps: float, min_samples: int) -> Tuple[np.ndarray, DBSCAN]:
     """Perform DBSCAN clustering on the given data.
 
     Args:
@@ -44,54 +44,54 @@ def dbscan_cluster(data: np.ndarray, eps: float, min_samples: int) -> Tuple[np.n
     return labels, dbscan
 
 
-def silhouette_analysis(data: np.ndarray, max_clusters: int) -> List[float]:
+def silhouetteAnalysis(data: np.ndarray, maxClusters: int) -> List[float]:
     """Perform silhouette analysis for a range of cluster counts.
 
     Args:
         data (np.ndarray): The input data for clustering.
-        max_clusters (int): The maximum number of clusters to evaluate.
+        maxClusters (int): The maximum number of clusters to evaluate.
 
     Returns:
         List[float]: The silhouette scores for each number of clusters.
     """
-    silhouette_scores = []
-    for n_clusters in range(2, max_clusters + 1):
-        labels, _ = kmeans_cluster(data, n_clusters)
+    silhouetteScores = []
+    for n_clusters in range(2, maxClusters + 1):
+        labels, _ = kmeansCluster(data, n_clusters)
         if len(set(labels)) > 1:  # More than one cluster
             score = silhouette_score(data, labels)
-            silhouette_scores.append(score)
+            silhouetteScores.append(score)
         else:
-            silhouette_scores.append(-1)  # Invalid score for single cluster
-    return silhouette_scores
+            silhouetteScores.append(-1)  # Invalid score for single cluster
+    return silhouetteScores
 
 
-def elbow_method(data: np.ndarray, max_clusters: int) -> None:
+def elbowMethod(data: np.ndarray, maxClusters: int) -> None:
     """Plot the elbow method to determine the optimal number of clusters.
 
     Args:
         data (np.ndarray): The input data for clustering.
-        max_clusters (int): The maximum number of clusters to evaluate.
+        maxClusters (int): The maximum number of clusters to evaluate.
     """
     inertia = []
-    for n_clusters in range(1, max_clusters + 1):
-        _, kmeans = kmeans_cluster(data, n_clusters)
+    for n_clusters in range(1, maxClusters + 1):
+        _, kmeans = kmeansCluster(data, n_clusters)
         inertia.append(kmeans.inertia_)
 
     plt.figure(figsize=(8, 5))
-    plt.plot(range(1, max_clusters + 1), inertia, marker='o')
+    plt.plot(range(1, maxClusters + 1), inertia, marker='o')
     plt.title('Elbow Method for Optimal k')
     plt.xlabel('Number of clusters')
     plt.ylabel('Inertia')
-    plt.xticks(range(1, max_clusters + 1))
+    plt.xticks(range(1, maxClusters + 1))
     plt.grid()
     plt.show()
 
 
 if __name__ == "__main__":
     # Example usage
-    sample_data, _ = make_blobs(n_samples=300, centers=4, cluster_std=0.60, random_state=0)
-    elbow_method(sample_data, max_clusters=10)
-    silhouette_scores = silhouette_analysis(sample_data, max_clusters=10)
-    print("Silhouette scores:", silhouette_scores)
-    labels, _ = kmeans_cluster(sample_data, n_clusters=4)
+    sampleData, _ = make_blobs(n_samples=300, centers=4, cluster_std=0.60, random_state=0)
+    elbowMethod(sampleData, maxClusters=10)
+    silhouetteScores = silhouetteAnalysis(sampleData, maxClusters=10)
+    print("Silhouette scores:", silhouetteScores)
+    labels, _ = kmeansCluster(sampleData, n_clusters=4)
     print("K-Means cluster labels:", labels)
