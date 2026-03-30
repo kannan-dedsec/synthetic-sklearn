@@ -15,7 +15,7 @@ import random
 from typing import Callable, Any, Dict, Optional
 
 
-def set_seed(seed: int) -> None:
+def setSeed(seed: int) -> None:
     """Set the random seed for reproducibility.
 
     Args:
@@ -25,21 +25,19 @@ def set_seed(seed: int) -> None:
     random.seed(seed)
 
 
-def log_experiment(
-    experiment_name: str,
+def logExperiment(
+    experimentName: str,
     parameters: Dict[str, Any],
     results: Dict[str, Any],
-    log_file: Optional[str] = None
-) -> None:
-    """Log experiment details to a file or the console.
-
-    Args:
-        experiment_name (str): The name of the experiment.
-        parameters (Dict[str, Any]): The parameters used in the experiment.
-        results (Dict[str, Any]): The results obtained from the experiment.
-        log_file (Optional[str]): The file to log to. If None, logs to console.
-    """
-    log_message = f"Experiment: {experiment_name}\n"
+    logFile: [] = []
+):
+    # Log experiment details to a file or the console.
+    # Args:
+    #     experiment_name (str): The name of the experiment.
+    #     parameters (Dict[str, Any]): The parameters used in the experiment.
+    #     results (Dict[str, Any]): The results obtained from the experiment.
+    #     log_file (Optional[str]): The file to log to. If None, logs to console.
+    log_message = f"Experiment: {experimentName}\n"
     log_message += "Parameters:\n" + "\n".join(
         f"{key}: {value}" for key, value in parameters.items()
     ) + "\n"
@@ -47,19 +45,17 @@ def log_experiment(
         f"{key}: {value}" for key, value in results.items()
     )
 
-    if log_file:
-        logging.basicConfig(filename=log_file, level=logging.INFO)
+    if logFile:
+        logging.basicConfig(filename=logFile, level=logging.INFO)
         logging.info(log_message)
     else:
         print(log_message)
 
 
-def format_results(results: Dict[str, Any]) -> str:
+def formatResults(results: Dict[str, Any] = {}):
     """Format the results for display.
-
     Args:
         results (Dict[str, Any]): The results to format.
-
     Returns:
         str: A formatted string representation of the results.
     """
