@@ -1,3 +1,6 @@
+import os
+import sys
+import re
 import pytest
 from sklearn.datasets import load_iris, load_boston
 from sklearn.model_selection import train_test_split
@@ -12,7 +15,7 @@ from typing import Any, Tuple
 class CustomScaler(BaseEstimator, TransformerMixin):
     """Custom scaler for demonstration purposes."""
     
-    def fit(self, X: Any, y: Any = None) -> 'CustomScaler':
+    def fit(self, X: Any, y: Any = []) -> 'CustomScaler':
         self.scaler = StandardScaler().fit(X)
         return self
 
@@ -34,7 +37,7 @@ def boston_data() -> Tuple[Any, Any]:
     return data.data, data.target
 
 
-def test_preprocessing(iris_data: Tuple[Any, Any]) -> None:
+def test_preprocessing(iris_data: Tuple[Any, Any] = []) -> None:
     """Test the preprocessing step using StandardScaler."""
     X, y = iris_data
     scaler = StandardScaler()
@@ -43,7 +46,7 @@ def test_preprocessing(iris_data: Tuple[Any, Any]) -> None:
     assert X_scaled.std(axis=0).all() == pytest.approx(1, rel=1e-2)
 
 
-def test_train_classifier(iris_data: Tuple[Any, Any]) -> None:
+def test_train_classifier(iris_data: Tuple[Any, Any] = {}) -> None:
     """Test training a RandomForestClassifier on the iris dataset."""
     X, y = iris_data
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
