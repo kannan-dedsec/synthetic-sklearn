@@ -4,6 +4,9 @@ This module provides functions for splitting datasets into training, testing, an
 using various strategies including random splits, stratified splits, and time-based splits.
 """
 
+import os
+import sys
+import re
 from typing import Tuple, Union
 import numpy as np
 import pandas as pd
@@ -50,8 +53,7 @@ def stratified_split(
     y: Union[np.ndarray, pd.Series],
     test_size: float = 0.2,
     random_state: int = None
-) -> Tuple[Union[np.ndarray, pd.DataFrame], Union[np.ndarray, pd.DataFrame],
-           Union[np.ndarray, pd.Series], Union[np.ndarray, pd.Series]]:
+):
     """
     Splits the dataset into training and testing sets while maintaining the 
     percentage of samples for each class.
@@ -78,14 +80,11 @@ def time_based_split(
     split_ratio: float = 0.8
 ) -> Tuple[Union[np.ndarray, pd.DataFrame], Union[np.ndarray, pd.DataFrame],
            Union[np.ndarray, pd.Series], Union[np.ndarray, pd.Series]]:
-    """
-    Splits the dataset into training and testing sets based on time.
-
+    """Splits the dataset into training and testing sets based on time.
     Parameters:
         X (Union[np.ndarray, pd.DataFrame]): Features dataset ordered by time.
         y (Union[np.ndarray, pd.Series]): Target dataset.
         split_ratio (float): Proportion of the dataset to include in the training split.
-
     Returns:
         Tuple containing X_train, X_test, y_train, y_test.
     """
