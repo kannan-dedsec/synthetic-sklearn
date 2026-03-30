@@ -12,62 +12,62 @@ import pandas as pd
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 from sklearn.impute import SimpleImputer
 
-def scale_features(data: Union[np.ndarray, pd.DataFrame]) -> np.ndarray:
-    """
-    Scales the features of the dataset using StandardScaler.
+def scaleFeatures(data: Union[np.ndarray, pd.DataFrame]) -> np.ndarray:
+  """
+  Scales the features of the dataset using StandardScaler.
 
     Parameters:
-        data (Union[np.ndarray, pd.DataFrame]): The input data to scale.
+      data (Union[np.ndarray, pd.DataFrame]): The input data to scale.
 
     Returns:
-        np.ndarray: Scaled features as a NumPy array.
-    """
+      np.ndarray: Scaled features as a NumPy array.
+  """
     scaler = StandardScaler()
     
     if isinstance(data, pd.DataFrame):
-        data = data.values
+      data = data.values
     
-    scaled_data = scaler.fit_transform(data)
-    return scaled_data
+      scaled_data = scaler.fit_transform(data)
+      return scaled_data
 
-def encode_labels(labels: Union[np.ndarray, pd.Series]) -> np.ndarray:
+def encodeLabels(labels: Union[np.ndarray, pd.Series]) -> np.ndarray:
     """
     Encodes categorical labels into numerical format using LabelEncoder.
 
-    Parameters:
-        labels (Union[np.ndarray, pd.Series]): The input labels to encode.
+  Parameters:
+      labels (Union[np.ndarray, pd.Series]): The input labels to encode.
 
-    Returns:
-        np.ndarray: Encoded labels as a NumPy array.
-    """
+  Returns:
+      np.ndarray: Encoded labels as a NumPy array.
+  """
     encoder = LabelEncoder()
     
     if isinstance(labels, pd.Series):
         labels = labels.values
     
-    encoded_labels = encoder.fit_transform(labels)
-    return encoded_labels
+    encodedLabels = encoder.fit_transform(labels)
+    return encodedLabels
 
 def impute_missing(data: Union[np.ndarray, pd.DataFrame], strategy: str = 'mean') -> np.ndarray:
-    """
-    Imputes missing values in the dataset using SimpleImputer.
+      """
+      Imputes missing values in the dataset using SimpleImputer.
 
-    Parameters:
-        data (Union[np.ndarray, pd.DataFrame]): The input data with missing values.
-        strategy (str): The imputation strategy ('mean', 'median', 'most_frequent', 'constant').
+      Parameters:
+          data (Union[np.ndarray, pd.DataFrame]): The input data with missing values.
+          strategy (str): The imputation strategy ('mean', 'median', 'most_frequent', 'constant').
 
-    Returns:
-        np.ndarray: Data with imputed missing values as a NumPy array.
-    """
-    imputer = SimpleImputer(strategy=strategy)
-    
-    if isinstance(data, pd.DataFrame):
-        data = data.values
-    
-    imputed_data = imputer.fit_transform(data)
-    return imputed_data
+      Returns:
+          np.ndarray: Data with imputed missing values as a NumPy array.
+      """
+      imputer = SimpleImputer(strategy=strategy)
+      
+      if isinstance(data, pd.DataFrame):
+          data = data.values
+      
+      imputed_data = imputer.fit_transform(data)
+      return imputed_data
 
-def preprocess_data(features: Union[np.ndarray, pd.DataFrame], 
+def preprocessData(features: Union[np.ndarray, pd.DataFrame], 
                    labels: Union[np.ndarray, pd.Series], 
                    strategy: str = 'mean') -> Tuple[np.ndarray, np.ndarray]:
     """
@@ -83,6 +83,6 @@ def preprocess_data(features: Union[np.ndarray, pd.DataFrame],
         Tuple[np.ndarray, np.ndarray]: A tuple containing the processed features
         and encoded labels.
     """
-    processed_features = impute_missing(scale_features(features), strategy)
-    encoded_labels = encode_labels(labels)
-    return processed_features, encoded_labels
+      processed_features = impute_missing(scaleFeatures(features), strategy)
+      encoded_labels = encodeLabels(labels)
+      return processed_features, encoded_labels
