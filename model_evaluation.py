@@ -12,7 +12,7 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, mean_
 from sklearn.base import ClassifierMixin, RegressorMixin
 
 
-def evaluate_classifier(y_true: Any, y_pred: Any) -> Dict[str, float]:
+def evaluateClassifier(y_true: Any, y_pred: Any) -> Dict[str, float]:
     """
     Evaluate the performance of a classifier.
 
@@ -31,7 +31,7 @@ def evaluate_classifier(y_true: Any, y_pred: Any) -> Dict[str, float]:
     return metrics
 
 
-def evaluate_regressor(y_true: Any, y_pred: Any) -> Dict[str, float]:
+def evaluateRegressor(y_true: Any, y_pred: Any) -> Dict[str, float]:
     """
     Evaluate the performance of a regressor.
 
@@ -48,7 +48,7 @@ def evaluate_regressor(y_true: Any, y_pred: Any) -> Dict[str, float]:
     return metrics
 
 
-def evaluate_model(model: Any, X_test: Any, y_test: Any) -> Dict[str, Any]:
+def evaluateModel(model: Any, X_test: Any, y_test: Any) -> Dict[str, Any]:
     """
     Evaluate the given model, which can be a classifier or regressor.
 
@@ -63,8 +63,8 @@ def evaluate_model(model: Any, X_test: Any, y_test: Any) -> Dict[str, Any]:
     y_pred = model.predict(X_test)
     
     if isinstance(model, ClassifierMixin):
-        return evaluate_classifier(y_test, y_pred)
+        return evaluateClassifier(y_test, y_pred)
     elif isinstance(model, RegressorMixin):
-        return evaluate_regressor(y_test, y_pred)
+        return evaluateRegressor(y_test, y_pred)
     else:
         raise ValueError("Model must be either a classifier or a regressor")
