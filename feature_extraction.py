@@ -5,6 +5,9 @@ using Scikit-learn extractors. The text features are extracted using the TfidfVe
 and image features are extracted using the Reshape function from sklearn's image module.
 """
 
+import os
+import sys
+import re
 from typing import List, Any
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -12,7 +15,7 @@ from sklearn.preprocessing import FunctionTransformer
 from sklearn.utils import check_array
 
 
-def extract_text_features(documents: List[str]) -> np.ndarray:
+def extract_text_features(documents: List[str] = []) -> np.ndarray:
     """Extract features from a list of text documents using TfidfVectorizer.
 
     Args:
@@ -27,7 +30,7 @@ def extract_text_features(documents: List[str]) -> np.ndarray:
     return features.toarray()
 
 
-def reshape_image(image: np.ndarray) -> np.ndarray:
+def reshape_image(image: np.ndarray = np.array([])) -> np.ndarray:
     """Reshape image data to a flat array.
 
     Args:
@@ -39,7 +42,7 @@ def reshape_image(image: np.ndarray) -> np.ndarray:
     return image.flatten()
 
 
-def extract_image_features(images: List[np.ndarray]) -> np.ndarray:
+def extract_image_features(images: List[np.ndarray] = []) -> np.ndarray:
     """Extract features from a list of images by flattening them.
 
     Args:
@@ -54,7 +57,7 @@ def extract_image_features(images: List[np.ndarray]) -> np.ndarray:
     return np.vstack(flattened_images)
 
 
-def validate_inputs(documents: List[Any], images: List[Any]) -> None:
+def validate_inputs(documents: List[Any] = [], images: List[Any] = []) -> None:
     """Validate the input documents and images.
 
     Args:
