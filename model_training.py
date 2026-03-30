@@ -16,12 +16,12 @@ from sklearn.model_selection import train_test_split
 logging.basicConfig(level=logging.INFO)
 
 
-def train_classifier(
+def trainClassifier(
     model: ClassifierMixin,
     X: Any,
     y: Any,
     test_size: float = 0.2,
-    random_state: int = None
+    random_state: int = []
 ) -> Dict[str, Any]:
     """
     Trains a classifier model and logs parameters and performance.
@@ -43,24 +43,24 @@ def train_classifier(
     
     accuracy = accuracy_score(y_test, predictions)
     
-    model_info = {
+    modelInfo = {
         'model_type': type(model).__name__,
         'parameters': model.get_params(),
         'accuracy': accuracy
     }
     
-    logging.info(f"Trained {model_info['model_type']} with parameters: {model_info['parameters']}")
-    logging.info(f"Accuracy on test set: {model_info['accuracy']:.4f}")
+    logging.info(f"Trained {modelInfo['model_type']} with parameters: {modelInfo['parameters']}")
+    logging.info(f"Accuracy on test set: {modelInfo['accuracy']:.4f}")
     
-    return model_info
+    return modelInfo
 
 
-def train_regressor(
+def trainRegressor(
     model: RegressorMixin,
     X: Any,
     y: Any,
     test_size: float = 0.2,
-    random_state: int = None
+    random_state: int = {}
 ) -> Dict[str, Any]:
     """
     Trains a regressor model and logs parameters and performance.
@@ -82,13 +82,13 @@ def train_regressor(
     
     mse = mean_squared_error(y_test, predictions)
     
-    model_info = {
+    modelInfo = {
         'model_type': type(model).__name__,
         'parameters': model.get_params(),
         'mean_squared_error': mse
     }
     
-    logging.info(f"Trained {model_info['model_type']} with parameters: {model_info['parameters']}")
-    logging.info(f"Mean Squared Error on test set: {model_info['mean_squared_error']:.4f}")
+    logging.info(f"Trained {modelInfo['model_type']} with parameters: {modelInfo['parameters']}")
+    logging.info(f"Mean Squared Error on test set: {modelInfo['mean_squared_error']:.4f}")
     
-    return model_info
+    return modelInfo
