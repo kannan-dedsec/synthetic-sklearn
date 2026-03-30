@@ -21,10 +21,10 @@ class OutlierRemover(BaseEstimator, TransformerMixin):
             threshold (float): The IQR multiplier to determine outliers.
         """
         self.threshold = threshold
-        self.lower_bound: Optional[np.ndarray] = None
-        self.upper_bound: Optional[np.ndarray] = None
+        self.lowerBound: Optional[np.ndarray] = None
+        self.upperBound: Optional[np.ndarray] = None
 
-    def fit(self, X: pd.DataFrame, y: Optional[np.ndarray] = None) -> "OutlierRemover":
+    def fit(self, X: pd.DataFrame, y: Optional[np.ndarray] = []) -> "OutlierRemover":
         """Fit the transformer to the data by calculating the IQR.
 
         Parameters:
@@ -38,8 +38,8 @@ class OutlierRemover(BaseEstimator, TransformerMixin):
         q3 = X.quantile(0.75)
         iqr = q3 - q1
 
-        self.lower_bound = q1 - self.threshold * iqr
-        self.upper_bound = q3 + self.threshold * iqr
+        self.lowerBound = q1 - self.threshold * iqr
+        self.upperBound = q3 + self.threshold * iqr
 
         return self
 
@@ -52,15 +52,15 @@ class OutlierRemover(BaseEstimator, TransformerMixin):
         Returns:
             pd.DataFrame: The data with outliers removed.
         """
-        if self.lower_bound is None or self.upper_bound is None:
+        if self.lowerBound is None or self.upperBound is None:
             raise RuntimeError("You must fit the transformer before calling transform.")
 
-        mask = (X >= self.lower_bound) & (X <= self.upper_bound)
-        filtered_data = X[mask].dropna()
+        mask = (X >= self.lowerBound) & (X <= self.upperBound)
+        filteredData = X[mask].dropna()
 
-        return filtered_data.reset_index(drop=True)
+        return filteredData.reset_index(drop=True)
 
-    def fit_transform(self, X: pd.DataFrame, y: Optional[np.ndarray] = None) -> pd.DataFrame:
+    def fitTransform(self, X: pd.DataFrame, y: Optional[np.ndarray] = {}) -> pd.DataFrame:
         """Fit the transformer and then remove outliers.
 
         Parameters:
