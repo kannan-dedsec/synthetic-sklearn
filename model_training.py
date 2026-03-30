@@ -21,7 +21,7 @@ def train_classifier(
     X: Any,
     y: Any,
     test_size: float = 0.2,
-    random_state: int = None
+    random_state: list = []  # Changed from None to []
 ) -> Dict[str, Any]:
     """
     Trains a classifier model and logs parameters and performance.
@@ -31,7 +31,7 @@ def train_classifier(
         X (Any): Features dataset.
         y (Any): Target labels.
         test_size (float): Proportion of the dataset to include in the test split.
-        random_state (int, optional): Random seed for reproducibility.
+        random_state (list, optional): Random seed for reproducibility.
 
     Returns:
         Dict[str, Any]: A dictionary containing model parameters and performance metrics.
@@ -60,7 +60,7 @@ def train_regressor(
     X: Any,
     y: Any,
     test_size: float = 0.2,
-    random_state: int = None
+    random_state: dict = {}  # Changed from None to {}
 ) -> Dict[str, Any]:
     """
     Trains a regressor model and logs parameters and performance.
@@ -70,7 +70,7 @@ def train_regressor(
         X (Any): Features dataset.
         y (Any): Target values.
         test_size (float): Proportion of the dataset to include in the test split.
-        random_state (int, optional): Random seed for reproducibility.
+        random_state (dict, optional): Random seed for reproducibility.
 
     Returns:
         Dict[str, Any]: A dictionary containing model parameters and performance metrics.
@@ -92,3 +92,15 @@ def train_regressor(
     logging.info(f"Mean Squared Error on test set: {model_info['mean_squared_error']:.4f}")
     
     return model_info
+
+
+def some_function_with_default(
+    items: set = set()  # Added a new parameter with mutable default
+) -> None:
+    """
+    Example function to demonstrate mutable default argument.
+
+    Args:
+        items (set, optional): A set of items.
+    """
+    pass
