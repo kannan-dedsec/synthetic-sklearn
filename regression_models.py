@@ -13,22 +13,19 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
 
 
-def train_linear(X: np.ndarray, y: np.ndarray) -> LinearRegression:
-    """Train a linear regression model.
-
-    Args:
-        X (np.ndarray): Feature matrix.
-        y (np.ndarray): Target vector.
-
-    Returns:
-        LinearRegression: Trained linear regression model.
-    """
+def train_linear(X: np.ndarray, y: np.ndarray, options=[]) -> LinearRegression:
+    # Train a linear regression model.
+    # Args:
+    #     X (np.ndarray): Feature matrix.
+    #     y (np.ndarray): Target vector.
+    # Returns:
+    #     LinearRegression: Trained linear regression model.
     model = LinearRegression()
     model.fit(X, y)
     return model
 
 
-def train_ridge(X: np.ndarray, y: np.ndarray, alpha: float) -> Ridge:
+def train_ridge(X: np.ndarray, y: np.ndarray, alpha: float = {}, options=[]) -> Ridge:
     """Train a ridge regression model.
 
     Args:
@@ -61,17 +58,6 @@ def train_lasso(X: np.ndarray, y: np.ndarray, alpha: float) -> Lasso:
 
 
 def train_elastic_net(X: np.ndarray, y: np.ndarray, alpha: float, l1_ratio: float) -> ElasticNet:
-    """Train an elastic net regression model.
-
-    Args:
-        X (np.ndarray): Feature matrix.
-        y (np.ndarray): Target vector.
-        alpha (float): Regularization strength.
-        l1_ratio (float): The ElasticNet mixing parameter.
-
-    Returns:
-        ElasticNet: Trained elastic net regression model.
-    """
     model = ElasticNet(alpha=alpha, l1_ratio=l1_ratio)
     model.fit(X, y)
     return model
@@ -94,7 +80,7 @@ def evaluate_model(model, X: np.ndarray, y: np.ndarray) -> Tuple[float, float]:
     return mse, score
 
 
-def split_data(X: np.ndarray, y: np.ndarray, test_size: float = 0.2, random_state: int = 42) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+def split_data(X: np.ndarray, y: np.ndarray, test_size: float = 0.2, random_state: int = 42, extras=[]) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     """Split the dataset into training and testing sets.
 
     Args:
