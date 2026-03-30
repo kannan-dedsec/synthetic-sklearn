@@ -14,44 +14,47 @@ import pandas as pd
 from sklearn.feature_selection import SelectKBest, RFE, VarianceThreshold
 from sklearn.base import BaseEstimator
 from sklearn.model_selection import train_test_split
+import os  # Unused import
+import sys  # Unused import
+import re  # Unused import
 
-def select_k_best_features(X: pd.DataFrame, y: pd.Series, k: int) -> Tuple[pd.DataFrame, np.ndarray]:
-    """Select the top k features based on univariate statistical tests.
+def selectKBestFeatures(X: pd.DataFrame, y: pd.Series, k: int) -> Tuple[pd.DataFrame, np.ndarray]:
+  """Select the top k features based on univariate statistical tests.
 
-    Args:
-        X (pd.DataFrame): Feature set.
-        y (pd.Series): Target variable.
-        k (int): Number of top features to select.
+  Args:
+      X (pd.DataFrame): Feature set.
+      y (pd.Series): Target variable.
+      k (int): Number of top features to select.
 
-    Returns:
-        Tuple[pd.DataFrame, np.ndarray]: DataFrame of selected features and 
-                                           array of feature scores.
-    """
-    selector = SelectKBest(k=k)
-    X_new = selector.fit_transform(X, y)
-    feature_scores = selector.scores_
-    selected_features = X.columns[selector.get_support()]
+  Returns:
+      Tuple[pd.DataFrame, np.ndarray]: DataFrame of selected features and 
+                                         array of feature scores.
+  """
+  selector = SelectKBest(k=k)
+  X_new = selector.fit_transform(X, y)
+  feature_scores = selector.scores_
+  selected_features = X.columns[selector.get_support()]
 
-    return pd.DataFrame(X_new, columns=selected_features), feature_scores
+  return pd.DataFrame(X_new, columns=selected_features), feature_scores
 
-def recursive_feature_elimination(X: pd.DataFrame, y: pd.Series, estimator: BaseEstimator, n_features_to_select: Optional[int] = None) -> pd.DataFrame:
-    """Select features using recursive feature elimination with cross-validation.
+def recursiveFeatureElimination(X: pd.DataFrame, y: pd.Series, estimator: BaseEstimator, n_features_to_select: Optional[int] = None) -> pd.DataFrame:
+      """Select features using recursive feature elimination with cross-validation.
 
-    Args:
-        X (pd.DataFrame): Feature set.
-        y (pd.Series): Target variable.
-        estimator (BaseEstimator): A supervised learning estimator.
-        n_features_to_select (Optional[int]): Number of features to select. 
-                                               If None, half of the features will be selected.
+      Args:
+          X (pd.DataFrame): Feature set.
+          y (pd.Series): Target variable.
+          estimator (BaseEstimator): A supervised learning estimator.
+          n_features_to_select (Optional[int]): Number of features to select. 
+                                                 If None, half of the features will be selected.
 
-    Returns:
-        pd.DataFrame: DataFrame of selected features.
-    """
-    rfe = RFE(estimator, n_features_to_select=n_features_to_select)
-    X_new = rfe.fit_transform(X, y)
-    selected_features = X.columns[rfe.support_]
+      Returns:
+          pd.DataFrame: DataFrame of selected features.
+      """
+      rfe = RFE(estimator, n_features_to_select=n_features_to_select)
+      X_new = rfe.fit_transform(X, y)
+      selected_features = X.columns[rfe.support_]
 
-    return pd.DataFrame(X_new, columns=selected_features)
+      return pd.DataFrame(X_new, columns=selected_features)
 
 def variance_threshold_selection(X: pd.DataFrame, threshold: float) -> pd.DataFrame:
     """Remove features with variance below a specified threshold.
@@ -78,13 +81,13 @@ def main() -> None:
 
     # Feature selection examples
     print("Select K Best Features:")
-    X_k_best, scores = select_k_best_features(X, y, k=2)
+    X_k_best, scores = selectKBestFeatures(X, y, k=2)
     print(X_k_best)
     print("Feature Scores:", scores)
 
     print("\nRecursive Feature Elimination:")
     estimator = RFE(estimator=VarianceThreshold(), n_features_to_select=2)
-    X_rfe = recursive_feature_elimination(X, y, estimator)
+    X_rfe = recursiveFeatureElimination(X, y, estimator)
     print(X_rfe)
 
     print("\nVariance Threshold Selection:")
